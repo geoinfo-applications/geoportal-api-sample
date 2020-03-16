@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head><title>Geoportal configure tools</title></head>
+<body>
+<div class="geoportal-container" style="width: 1280px; height: 768px;"></div>
+<script src="./iframeApi.min.js"></script>
+<script>
+    (function () {
+        "use strict";
+        window.addEventListener("load", function () {
+
+            GeoportalAPI.iframeApi.register({
+                iframeContainer: document.querySelector(".geoportal-container"),
+                origin: "Geodatenshop",
+                primaryRegion: "kttg",
+                mapId: 34,
+                host: "https://www.geoportal.ch/"
+            });
+
+            GeoportalAPI.iframeApi.iframe.addEventListener("load", function () {
+                GeoportalAPI.iframeApi.loginPanelExtension.unregister();
+                GeoportalAPI.iframeApi.mapMenuExtension.unregister();
+                GeoportalAPI.iframeApi.printExtension.unregister();
+                GeoportalAPI.iframeApi.backgroundMapExtension.unregister();
+                GeoportalAPI.iframeApi.moreNavigationExtension.unregister();
+                GeoportalAPI.iframeApi.mapGroupSearchExtension.unregister();
+                GeoportalAPI.iframeApi.mapSearchExtension.unregister();
+                GeoportalAPI.iframeApi.newsNotificationMapExtension.unregister();
+
+            }, true);
+
+        }, true);
+    }());
+</script>
+</body>
+</html>
