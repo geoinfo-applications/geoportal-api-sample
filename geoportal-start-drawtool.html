@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+<head><title>Geoportal in IFrame</title></head>
+<body>
+<div class="geoportal-container" style="width: 1280px; height: 768px;"></div>
+<script src="./iframeApi.min.js"></script>
+<script>
+    (function () {
+        "use strict";
+        window.addEventListener("load", function () {
+
+            GeoportalAPI.iframeApi.register({
+                iframeContainer: document.querySelector(".geoportal-container"),
+                origin: "Geodatenshop",
+                primaryRegion: "kttg",
+                mapId: 34,
+                host: "https://www.geoportal.ch/"
+            });
+
+            GeoportalAPI.iframeApi.iframe.addEventListener("load", function () {
+                GeoportalAPI.iframeApi.mapViewTool.registerMapReadyCallback(function () {
+                    GeoportalAPI.iframeApi.drawPopupTool.initialize({
+                        activeDrawModes: ["Polygon", "Rectangle", "Circle", "Buffer"],
+                        toolTitle: "Auswahl", // ToDo: Übersetzung einbinden
+                        closeable: false,
+                        defaultTool: "Rectangle",
+                        showColorSelectors: false,
+                        showLineWidth: false,
+                        showPreview: false,
+                        hideDeleteAllButton: true,
+                        hideExportButton: true,
+                        hideImportButton: true,
+                        showConfirmationButton: true
+                    });
+                });
+            }, true);
+        }, true);
+    }());
+</script>
+</body>
+</html>
